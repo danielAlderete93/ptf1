@@ -1,6 +1,7 @@
 package com.proyectotorneos.application.api.rest;
 
 import com.proyectotorneos.application.api.rest.dto.request.PartidoRequest;
+import com.proyectotorneos.application.api.rest.dto.response.MessageResponse;
 import com.proyectotorneos.application.api.rest.dto.response.PartidoResponse;
 import com.proyectotorneos.application.api.rest.mapper.PartidoRestMapper;
 import com.proyectotorneos.domain.model.Partido;
@@ -50,13 +51,23 @@ public class ControllerPartido {
 
     @PostMapping(value = "/nuevo", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> add(@RequestBody PartidoRequest request) {
+    public ResponseEntity<MessageResponse> add(@RequestBody PartidoRequest request) {
+        MessageResponse messageResponse;
         Partido partido;
+
 
         partido = partidoMapper.toDomain(request);
         partidoService.guarda(partido);
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        messageResponse = new MessageResponse(
+                "Nuevo partido",
+                "Se salvo correctamente el partido entre " +
+                        partido.getNombreLocales() +
+                        " vs " +
+                        partido.getNombreVisitante()
+        );
+
+        return new ResponseEntity<>(messageResponse, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/{id}/finaliza", produces = MediaType.APPLICATION_JSON_VALUE)

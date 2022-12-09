@@ -1,7 +1,7 @@
 package com.proyectotorneos.infra.adaptors.repositories.db;
 
 import com.proyectotorneos.domain.model.ActuacionEquipo;
-import com.proyectotorneos.domain.port.repositories.ActuacionEquipoRepository;
+import com.proyectotorneos.infra.entities.repositories.ActuacionEquipoRepository;
 import com.proyectotorneos.infra.adaptors.repositories.ActuacionEquipoRepositoryJPA;
 import com.proyectotorneos.infra.entities.ActuacionEquipoEntity;
 import com.proyectotorneos.infra.mappers.ActuacionMapper;

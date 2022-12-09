@@ -1,7 +1,7 @@
 package com.proyectotorneos.infra.adaptors.repositories.db;
 
 import com.proyectotorneos.domain.model.HabilidadJugador;
-import com.proyectotorneos.domain.port.repositories.HabilidadJugadorRepository;
+import com.proyectotorneos.infra.entities.repositories.HabilidadJugadorRepository;
 import com.proyectotorneos.infra.adaptors.repositories.HabilidadJugadorRepositoryJPA;
 import com.proyectotorneos.infra.entities.HabilidadJugadorEntity;
 import com.proyectotorneos.infra.mappers.HabilidadJugadorMapper;

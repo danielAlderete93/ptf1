@@ -1,7 +1,7 @@
 package com.proyectotorneos.infra.adaptors.repositories.db;
 
 import com.proyectotorneos.domain.model.TipoHabilidad;
-import com.proyectotorneos.domain.port.repositories.TipoHabilidadRepository;
+import com.proyectotorneos.infra.entities.repositories.TipoHabilidadRepository;
 import com.proyectotorneos.infra.adaptors.repositories.TipoHabilidadRepositoryJPA;
 import com.proyectotorneos.infra.entities.TipoHabilidadEntity;
 import com.proyectotorneos.infra.mappers.TipoHabilidadMapper;

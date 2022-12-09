@@ -12,6 +12,7 @@ import com.proyectotorneos.domain.port.service.JugadorService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class ActuacionEquipoRestMapper {
@@ -67,11 +68,11 @@ public class ActuacionEquipoRestMapper {
         equipo = equipoService.buscaPorID(request.equipoID());
         jugadorList = request.jugadoresParticipante().stream()
                 .map(jugadorService::buscaPorID)
-                .toList();
+                .collect(Collectors.toList());
 
         goles = request.goles().stream()
                 .map(partidoGolRestMapper::toDomain)
-                .toList();
+                .collect(Collectors.toList());
 
         actuacionEquipo.setEquipo(equipo);
         actuacionEquipo.setJugadoresParticipante(jugadorList);

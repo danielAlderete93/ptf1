@@ -1,8 +1,8 @@
 package com.proyectotorneos.infra.config.db;
 
-import com.proyectotorneos.domain.port.repositories.*;
 import com.proyectotorneos.domain.port.service.*;
 import com.proyectotorneos.domain.port.service.impl.*;
+import com.proyectotorneos.infra.entities.repositories.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -46,6 +46,11 @@ public class BeanConfiguration {
     @Bean
     PartidoGolService partidoGolService(PartidoGolRepository repository) {
         return new DomainPartidoGolService(repository);
+    }
+
+    @Bean
+    FechaCompetitivaService fechaCompetitivaService(FechaCompetitivaRepository repository) {
+        return new DomainFechaCompetitivaService(repository);
     }
 
 

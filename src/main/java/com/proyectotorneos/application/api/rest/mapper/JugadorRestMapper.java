@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class JugadorRestMapper {
@@ -38,7 +39,10 @@ public class JugadorRestMapper {
             return null;
         }
 
-        habilidades = jugador.getHabilidades().stream().map(habilidadJugadorRestMapper::toResponse).toList();
+        habilidades = jugador.getHabilidades().stream()
+                .map(habilidadJugadorRestMapper::toResponse)
+                .toList()
+        ;
 
         return new JugadorResponse(
                 jugador.getId(),
@@ -62,11 +66,13 @@ public class JugadorRestMapper {
         if (request == null) {
             return null;
         }
-        //TODO:Refactor ojota
+
         if (request.habilidadesID().isEmpty()) {
             habilidadJugador = new ArrayList<>();
         } else {
-            habilidadJugador = request.habilidadesID().stream().map(habilidadJugadorService::buscaPorID).toList();
+            habilidadJugador = request.habilidadesID().stream()
+                    .map(habilidadJugadorService::buscaPorID)
+                    .collect(Collectors.toList());
         }
 
 

@@ -1,4 +1,4 @@
-package com.proyectotorneos.domain.port.repositories;
+package com.proyectotorneos.infra.entities.repositories;
 
 import com.proyectotorneos.domain.model.HabilidadJugador;
 

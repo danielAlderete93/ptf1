@@ -1,6 +1,7 @@
 package com.proyectotorneos.application.api.rest;
 
 import com.proyectotorneos.application.api.rest.dto.request.PosicionJuegoRequest;
+import com.proyectotorneos.application.api.rest.dto.response.MessageResponse;
 import com.proyectotorneos.application.api.rest.dto.response.PosicionJuegoResponse;
 import com.proyectotorneos.application.api.rest.mapper.PosicionJuegoRestMapper;
 import com.proyectotorneos.domain.model.PosicionJuego;
@@ -47,8 +48,14 @@ public class ControllerPosicionJuego {
 
     @PostMapping(value = "/nuevo", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> add(@RequestBody PosicionJuegoRequest request) {
+    public ResponseEntity<MessageResponse> add(@RequestBody PosicionJuegoRequest request) {
+        MessageResponse messageResponse;
         posicionJuegoService.guarda(mapper.toDomain(request));
-        return new ResponseEntity<>(HttpStatus.CREATED);
+
+        messageResponse = new MessageResponse(
+                "Nuevo posicion de juego",
+                "Se salvo correctamente la posicion de juego."
+        );
+        return new ResponseEntity<>(messageResponse,HttpStatus.CREATED);
     }
 }

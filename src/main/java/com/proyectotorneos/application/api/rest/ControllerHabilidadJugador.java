@@ -2,6 +2,7 @@ package com.proyectotorneos.application.api.rest;
 
 import com.proyectotorneos.application.api.rest.dto.request.HabilidadJugadorRequest;
 import com.proyectotorneos.application.api.rest.dto.response.HabilidadJugadorResponse;
+import com.proyectotorneos.application.api.rest.dto.response.MessageResponse;
 import com.proyectotorneos.application.api.rest.mapper.HabilidadJugadorRestMapper;
 import com.proyectotorneos.domain.model.HabilidadJugador;
 import com.proyectotorneos.domain.port.service.HabilidadJugadorService;
@@ -49,10 +50,15 @@ public class ControllerHabilidadJugador {
 
     @PostMapping(value = "/nuevo", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> add(@RequestBody HabilidadJugadorRequest request) {
-
+    public ResponseEntity<MessageResponse> add(@RequestBody HabilidadJugadorRequest request) {
+        MessageResponse messageResponse;
         habilidadJugadorService.guarda(mapper.toDomain(request));
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+
+        messageResponse = new MessageResponse(
+                "Nueva habilidad",
+                "Se salvo correctamente la habilidad."
+        );
+        return new ResponseEntity<>(messageResponse, HttpStatus.CREATED);
     }
 }

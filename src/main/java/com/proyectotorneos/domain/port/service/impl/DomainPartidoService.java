@@ -1,7 +1,7 @@
 package com.proyectotorneos.domain.port.service.impl;
 
 import com.proyectotorneos.domain.model.Partido;
-import com.proyectotorneos.domain.port.repositories.PartidoRepository;
+import com.proyectotorneos.infra.entities.repositories.PartidoRepository;
 import com.proyectotorneos.domain.port.service.PartidoService;
 import com.proyectotorneos.domain.validators.ValidadorPartido;
 import com.proyectotorneos.domain.validators.Validador;

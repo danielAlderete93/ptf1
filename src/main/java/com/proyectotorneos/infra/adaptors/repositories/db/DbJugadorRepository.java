@@ -1,7 +1,7 @@
 package com.proyectotorneos.infra.adaptors.repositories.db;
 
 import com.proyectotorneos.domain.model.Jugador;
-import com.proyectotorneos.domain.port.repositories.JugadorRepository;
+import com.proyectotorneos.infra.entities.repositories.JugadorRepository;
 import com.proyectotorneos.infra.adaptors.repositories.JugadorRepositoryJPA;
 import com.proyectotorneos.infra.entities.JugadorEntity;
 import com.proyectotorneos.infra.mappers.JugadorMapper;

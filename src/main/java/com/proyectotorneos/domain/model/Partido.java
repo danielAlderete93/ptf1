@@ -23,6 +23,14 @@ public class Partido extends Identificable {
         return actuacionEquipoVisitante.cantGoles();
     }
 
+    public String getNombreLocales() {
+        return this.actuacionEquipoLocal.getEquipo().getNombre();
+    }
+
+    public String getNombreVisitante() {
+        return this.actuacionEquipoVisitante.getEquipo().getNombre();
+    }
+
     public void finaliza() {
         this.setFinalizado(true);
     }

@@ -1,7 +1,7 @@
 package com.proyectotorneos.domain.port.service.impl;
 
 import com.proyectotorneos.domain.model.ActuacionEquipo;
-import com.proyectotorneos.domain.port.repositories.ActuacionEquipoRepository;
+import com.proyectotorneos.infra.entities.repositories.ActuacionEquipoRepository;
 import com.proyectotorneos.domain.port.service.ActuacionEquipoService;
 
 public class DomainActuacionEquipoService implements ActuacionEquipoService {

@@ -2,13 +2,12 @@ package com.proyectotorneos.domain.port.service.impl;
 
 import com.proyectotorneos.domain.model.Equipo;
 import com.proyectotorneos.domain.model.Jugador;
-import com.proyectotorneos.domain.port.repositories.EquipoRepository;
+import com.proyectotorneos.infra.entities.repositories.EquipoRepository;
 import com.proyectotorneos.domain.port.service.EquipoService;
 import com.proyectotorneos.domain.validators.Validador;
 import com.proyectotorneos.domain.validators.ValidadorEquipo;
 import com.proyectotorneos.domain.validators.ValidadorJugador;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DomainEquipoService implements EquipoService {
@@ -27,12 +26,12 @@ public class DomainEquipoService implements EquipoService {
     }
 
     @Override
-    public void guarda(final Equipo o) {
+    public void guarda(Equipo o) {
         this.equipoRepository.alta(o);
     }
 
     @Override
-    public Equipo buscaPorID(final Integer id) {
+    public Equipo buscaPorID(Integer id) {
         return this.equipoRepository.getById(id);
     }
 
@@ -43,20 +42,17 @@ public class DomainEquipoService implements EquipoService {
 
 
     @Override
-    public void elimina(final Equipo o) {
+    public void elimina(Equipo o) {
 
     }
 
     @Override
-    public void agregaJugador(final Equipo equipo, final Jugador jugador) {
-        List<Jugador> jugadorList;
+    public void agregaJugador(Equipo equipo, Jugador jugador) {
 
         jugadorValidador.valida(jugador);
         equipoValidador.valida(equipo);
 
-        jugadorList = new ArrayList<>(equipo.getJugadores());
-        jugadorList.add(jugador);
-        equipo.setJugadores(jugadorList);
+        equipo.addJugador(jugador);
         this.equipoRepository.alta(equipo);
 
 

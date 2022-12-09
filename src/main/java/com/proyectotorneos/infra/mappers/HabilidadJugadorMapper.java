@@ -12,8 +12,8 @@ public class HabilidadJugadorMapper {
 
     private final TipoHabilidadMapper tipoHabilidadMapper;
 
-    public HabilidadJugadorMapper() {
-        this.tipoHabilidadMapper = new TipoHabilidadMapper();
+    public HabilidadJugadorMapper(TipoHabilidadMapper tipoHabilidadMapper) {
+        this.tipoHabilidadMapper = tipoHabilidadMapper;
     }
 
     public HabilidadJugadorEntity toEntity(HabilidadJugador habilidadJugador) {

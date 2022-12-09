@@ -8,13 +8,14 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class EquipoMapper {
     private final JugadorMapper jugadorMapper;
 
-    public EquipoMapper() {
-        this.jugadorMapper = new JugadorMapper();
+    public EquipoMapper(JugadorMapper jugadorMapper) {
+        this.jugadorMapper = jugadorMapper;
     }
 
     @SuppressWarnings("DuplicatedCode")
@@ -32,10 +33,13 @@ public class EquipoMapper {
         entity.setUrlEscudo(equipo.getUrlEscudo());
         entity.setUrlPlantel(equipo.getUrlPlantel());
 
-        if(equipo.getJugadores() == null){
+        if (equipo.getJugadores() == null) {
             jugadorEntityList = new ArrayList<>();
-        }else{
-            jugadorEntityList = equipo.getJugadores().stream().map(jugadorMapper::toEntity).toList();
+        } else {
+            jugadorEntityList = equipo.getJugadores().stream()
+                    .map(jugadorMapper::toEntity)
+                    .toList()
+            ;
         }
 
 
@@ -59,10 +63,13 @@ public class EquipoMapper {
         equipo.setUrlEscudo(equipoEntity.getUrlEscudo());
         equipo.setUrlPlantel(equipoEntity.getUrlPlantel());
 
-        if(equipoEntity.getJugadores() == null){
-          jugadorList = new ArrayList<>();
-        }else{
-            jugadorList = equipoEntity.getJugadores().stream().map(jugadorMapper::toDomain).toList();
+        if (equipoEntity.getJugadores() == null) {
+            jugadorList = new ArrayList<>();
+        } else {
+            jugadorList = equipoEntity.getJugadores().stream()
+                    .map(jugadorMapper::toDomain)
+                    .collect(Collectors.toList())
+            ;
         }
 
 
@@ -70,7 +77,6 @@ public class EquipoMapper {
 
         return equipo;
     }
-
 
 
 }

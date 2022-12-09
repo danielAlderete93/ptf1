@@ -8,9 +8,10 @@ import org.springframework.stereotype.Component;
 public class PartidoGolMapper {
     private final JugadorMapper jugadorMapper;
 
-    public PartidoGolMapper() {
-        this.jugadorMapper = new JugadorMapper();
+    public PartidoGolMapper(JugadorMapper jugadorMapper) {
+        this.jugadorMapper = jugadorMapper;
     }
+
 
     public PartidoGolEntity toEntity(PartidoGol gol) {
         PartidoGolEntity entity = new PartidoGolEntity();

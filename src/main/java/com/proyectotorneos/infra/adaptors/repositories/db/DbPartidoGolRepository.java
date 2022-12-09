@@ -1,7 +1,7 @@
 package com.proyectotorneos.infra.adaptors.repositories.db;
 
 import com.proyectotorneos.domain.model.PartidoGol;
-import com.proyectotorneos.domain.port.repositories.PartidoGolRepository;
+import com.proyectotorneos.infra.entities.repositories.PartidoGolRepository;
 import com.proyectotorneos.infra.adaptors.repositories.PartidoGolRepositoryJPA;
 import com.proyectotorneos.infra.entities.PartidoGolEntity;
 import com.proyectotorneos.infra.mappers.PartidoGolMapper;

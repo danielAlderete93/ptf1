@@ -3,6 +3,7 @@ package com.proyectotorneos.application.api.rest;
 
 import com.proyectotorneos.application.api.rest.dto.request.JugadorRequest;
 import com.proyectotorneos.application.api.rest.dto.response.JugadorResponse;
+import com.proyectotorneos.application.api.rest.dto.response.MessageResponse;
 import com.proyectotorneos.application.api.rest.mapper.JugadorRestMapper;
 import com.proyectotorneos.domain.model.Equipo;
 import com.proyectotorneos.domain.model.Jugador;
@@ -42,7 +43,8 @@ public class ControllerJugador {
 
     @PostMapping(value = "/nuevo", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> add(@RequestBody JugadorRequest request) {
+    public ResponseEntity<MessageResponse> add(@RequestBody JugadorRequest request) {
+        MessageResponse messageResponse;
         Equipo equipo;
         Jugador jugador;
 
@@ -50,10 +52,32 @@ public class ControllerJugador {
         jugador = jugadorRestMapper.toDomain(request);
         equipo = equipoService.buscaPorID(request.equipoID());
 
-
-
         equipoService.agregaJugador(equipo, jugador);
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        messageResponse = new MessageResponse(
+                "Creacion de jugador",
+                "Se agrego correctamente al jugador " + jugador.getNombre() + " en equipo " + equipo.getNombre()
+        );
+
+        return new ResponseEntity<>(messageResponse, HttpStatus.CREATED);
     }
+
+    @PutMapping(value = "{idJugador}/edita", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<MessageResponse> edita(@PathVariable Integer idJugador, @RequestBody JugadorRequest request) {
+        Jugador jugador;
+        MessageResponse messageResponse;
+
+        jugador = jugadorRestMapper.toDomain(request);
+        jugador.setId(idJugador);
+
+        jugadorService.guarda(jugador);
+        messageResponse = new MessageResponse(
+                "Edicion de jugador",
+                "Se edito correctamente al jugador de id: " + idJugador
+        );
+
+        return ResponseEntity.ok(messageResponse);
+    }
+
 }

@@ -2,7 +2,7 @@ package com.proyectotorneos.domain.port.service.impl;
 
 import com.proyectotorneos.domain.exceptions.DomainExceptionTipoHabilidad;
 import com.proyectotorneos.domain.model.TipoHabilidad;
-import com.proyectotorneos.domain.port.repositories.TipoHabilidadRepository;
+import com.proyectotorneos.infra.entities.repositories.TipoHabilidadRepository;
 import com.proyectotorneos.domain.port.service.TipoHabilidadService;
 
 import java.util.List;

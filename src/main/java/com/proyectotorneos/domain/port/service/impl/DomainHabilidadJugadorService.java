@@ -2,7 +2,7 @@ package com.proyectotorneos.domain.port.service.impl;
 
 import com.proyectotorneos.domain.exceptions.DomainExceptionHabilidadJugador;
 import com.proyectotorneos.domain.model.HabilidadJugador;
-import com.proyectotorneos.domain.port.repositories.HabilidadJugadorRepository;
+import com.proyectotorneos.infra.entities.repositories.HabilidadJugadorRepository;
 import com.proyectotorneos.domain.port.service.HabilidadJugadorService;
 
 import java.util.List;

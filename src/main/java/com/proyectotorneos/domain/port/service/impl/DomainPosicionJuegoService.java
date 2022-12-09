@@ -2,7 +2,7 @@ package com.proyectotorneos.domain.port.service.impl;
 
 import com.proyectotorneos.domain.exceptions.DomainExceptionPosicionJuego;
 import com.proyectotorneos.domain.model.PosicionJuego;
-import com.proyectotorneos.domain.port.repositories.PosicionJuegoRepository;
+import com.proyectotorneos.infra.entities.repositories.PosicionJuegoRepository;
 import com.proyectotorneos.domain.port.service.PosicionJuegoService;
 
 import java.util.List;

@@ -2,6 +2,7 @@ package com.proyectotorneos.application.api.rest;
 
 import com.proyectotorneos.application.api.rest.dto.request.ActuacionPartidoRequest;
 import com.proyectotorneos.application.api.rest.dto.response.ActuacionEquipoResponse;
+import com.proyectotorneos.application.api.rest.dto.response.MessageResponse;
 import com.proyectotorneos.application.api.rest.mapper.ActuacionEquipoRestMapper;
 import com.proyectotorneos.domain.model.ActuacionEquipo;
 import com.proyectotorneos.domain.model.Partido;
@@ -28,7 +29,8 @@ public class ControllerActuacionEquipo {
 
     @PostMapping(value = "/{idPartido}/actuacion/local", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> addLocal(@PathVariable Integer idPartido, @RequestBody ActuacionPartidoRequest request) {
+    public ResponseEntity<MessageResponse> addLocal(@PathVariable Integer idPartido, @RequestBody ActuacionPartidoRequest request) {
+        MessageResponse messageResponse;
         Partido partido = partidoService.buscaPorID(idPartido);
         ActuacionEquipo actuacionEquipo = actuacionEquipoRestMapper.toDomain(request);
 
@@ -38,7 +40,12 @@ public class ControllerActuacionEquipo {
 
         partidoService.guarda(partido);
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        messageResponse = new MessageResponse(
+                "Actualizacion de actuacion del equipo locales",
+                "Se salvo correctamente la actuacion del equipo" + actuacionEquipo.getEquipo().getNombre()
+        );
+
+        return new ResponseEntity<>(messageResponse, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/{idPartido}/actuacion/local", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -52,7 +59,8 @@ public class ControllerActuacionEquipo {
 
     @PostMapping(value = "/{idPartido}/actuacion/visitante", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> addVisitante(@PathVariable Integer idPartido, @RequestBody ActuacionPartidoRequest request) {
+    public ResponseEntity<MessageResponse> addVisitante(@PathVariable Integer idPartido, @RequestBody ActuacionPartidoRequest request) {
+        MessageResponse messageResponse;
         Partido partido = partidoService.buscaPorID(idPartido);
         ActuacionEquipo actuacionEquipo = actuacionEquipoRestMapper.toDomain(request);
 
@@ -63,7 +71,12 @@ public class ControllerActuacionEquipo {
         partidoService.guarda(partido);
 
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        messageResponse = new MessageResponse(
+                "Actualizacion de actuacion del equipo visitante",
+                "Se salvo correctamente la actuacion del equipo" + actuacionEquipo.getEquipo().getNombre()
+        );
+
+        return new ResponseEntity<>(messageResponse, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/{idPartido}/actuacion/visitante", produces = MediaType.APPLICATION_JSON_VALUE)

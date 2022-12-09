@@ -1,7 +1,7 @@
 package com.proyectotorneos.infra.adaptors.repositories.db;
 
 import com.proyectotorneos.domain.model.PosicionJuego;
-import com.proyectotorneos.domain.port.repositories.PosicionJuegoRepository;
+import com.proyectotorneos.infra.entities.repositories.PosicionJuegoRepository;
 import com.proyectotorneos.infra.adaptors.repositories.PosicionJuegoRepositoryJPA;
 import com.proyectotorneos.infra.entities.PosicionJuegoEntity;
 import com.proyectotorneos.infra.mappers.PosicionJuegoMapper;

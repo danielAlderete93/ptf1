@@ -3,6 +3,7 @@ package com.proyectotorneos.application.api.rest;
 import com.proyectotorneos.application.api.rest.dto.request.EquipoRequest;
 import com.proyectotorneos.application.api.rest.dto.response.EquipoResponse;
 import com.proyectotorneos.application.api.rest.dto.response.JugadorResponse;
+import com.proyectotorneos.application.api.rest.dto.response.MessageResponse;
 import com.proyectotorneos.application.api.rest.mapper.EquipoRestMapper;
 import com.proyectotorneos.application.api.rest.mapper.JugadorRestMapper;
 import com.proyectotorneos.domain.model.Equipo;
@@ -52,9 +53,16 @@ public class ControllerEquipo {
 
     @PostMapping(value = "/nuevo", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> add(@RequestBody EquipoRequest request) {
+    public ResponseEntity<MessageResponse> add(@RequestBody EquipoRequest request) {
+        MessageResponse messageResponse;
         equipoService.guarda(equipoMapper.toDomain(request));
-        return new ResponseEntity<>(HttpStatus.CREATED);
+
+        messageResponse = new MessageResponse(
+                "Nuevo Equipo",
+                "Se salvo correctamente el equipo"
+        );
+
+        return new ResponseEntity<>(messageResponse, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/{id}/jugadores", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -20,6 +20,10 @@ public class Equipo extends Identificable {
         return this.getJugadores().contains(jugador);
     }
 
+    public void addJugador(Jugador jugador) {
+        this.jugadores.add(jugador);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

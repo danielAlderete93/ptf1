@@ -1,7 +1,7 @@
 package com.proyectotorneos.infra.adaptors.repositories.db;
 
 import com.proyectotorneos.domain.model.Equipo;
-import com.proyectotorneos.domain.port.repositories.EquipoRepository;
+import com.proyectotorneos.infra.entities.repositories.EquipoRepository;
 import com.proyectotorneos.infra.adaptors.repositories.EquipoRepositoryJPA;
 import com.proyectotorneos.infra.entities.EquipoEntity;
 import com.proyectotorneos.infra.mappers.EquipoMapper;
@@ -31,7 +31,9 @@ public class DbEquipoRepository implements EquipoRepository {
     @Override
     public Equipo getById(Integer id) {
         EquipoEntity equipoEntity;
-        equipoEntity = equipoRepositoryJPA.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso no encontrado"));
+
+        equipoEntity = equipoRepositoryJPA.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Recurso no encontrado"));
 
         return equipoMapper.toDomain(equipoEntity);
     }
@@ -42,7 +44,10 @@ public class DbEquipoRepository implements EquipoRepository {
         equipoEntityList = equipoRepositoryJPA.findAll();
 
 
-        return equipoEntityList.stream().map(equipoMapper::toDomain).toList();
+        return equipoEntityList.stream()
+                .map(equipoMapper::toDomain)
+                .toList()
+                ;
     }
 
     @Override

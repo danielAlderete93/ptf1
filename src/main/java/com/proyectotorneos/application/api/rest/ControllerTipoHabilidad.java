@@ -1,6 +1,7 @@
 package com.proyectotorneos.application.api.rest;
 
 import com.proyectotorneos.application.api.rest.dto.request.TipoHabilidadRequest;
+import com.proyectotorneos.application.api.rest.dto.response.MessageResponse;
 import com.proyectotorneos.application.api.rest.dto.response.TipoHabilidadResponse;
 import com.proyectotorneos.application.api.rest.mapper.TipoHabilidadRestMapper;
 import com.proyectotorneos.domain.model.TipoHabilidad;
@@ -49,8 +50,13 @@ public class ControllerTipoHabilidad {
 
     @PostMapping(value = "/nuevo", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> add(@RequestBody TipoHabilidadRequest request) {
+    public ResponseEntity<MessageResponse> add(@RequestBody TipoHabilidadRequest request) {
+        MessageResponse messageResponse;
         tipoHabilidadService.guarda(mapper.toDomain(request));
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        messageResponse = new MessageResponse(
+                "Nuevo tipo de habilidad",
+                "Se salvo correctamente el tipo de habilidad."
+        );
+        return new ResponseEntity<>(messageResponse, HttpStatus.CREATED);
     }
 }

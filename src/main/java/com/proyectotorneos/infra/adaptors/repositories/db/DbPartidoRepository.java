@@ -1,7 +1,7 @@
 package com.proyectotorneos.infra.adaptors.repositories.db;
 
 import com.proyectotorneos.domain.model.Partido;
-import com.proyectotorneos.domain.port.repositories.PartidoRepository;
+import com.proyectotorneos.infra.entities.repositories.PartidoRepository;
 import com.proyectotorneos.infra.adaptors.repositories.PartidoRepositoryJPA;
 import com.proyectotorneos.infra.entities.PartidoEntity;
 import com.proyectotorneos.infra.mappers.PartidoMapper;
