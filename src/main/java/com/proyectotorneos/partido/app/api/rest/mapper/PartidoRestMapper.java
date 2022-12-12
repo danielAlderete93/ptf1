@@ -30,8 +30,8 @@ public class PartidoRestMapper {
 
         return new PartidoResponse(
                 partido.getId(),
-                actuacionEquipoRestMapper.toResponse(partido.getActuacionEquipoLocal()),
-                actuacionEquipoRestMapper.toResponse(partido.getActuacionEquipoVisitante()),
+                actuacionEquipoRestMapper.toResponse(partido.getActuacionLocal()),
+                actuacionEquipoRestMapper.toResponse(partido.getActuacionVisitante()),
                 partido.isFinalizado(),
                 partido.getFecha(),
                 partido.cantGolesLocales(),
@@ -63,8 +63,8 @@ public class PartidoRestMapper {
         visitante.setJugadoresParticipante(new ArrayList<>());
         visitante.setEquipo(equipoService.buscaPorID(request.idEquipoVisitante()));
 
-        partido.setActuacionEquipoLocal(locales);
-        partido.setActuacionEquipoVisitante(visitante);
+        partido.setActuacionLocal(locales);
+        partido.setActuacionVisitante(visitante);
 
 
         return partido;

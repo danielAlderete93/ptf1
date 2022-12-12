@@ -19,14 +19,18 @@ import java.util.List;
 public class JugadorEntity extends EntidadPersistente {
     @Column(name = "nombre")
     private String nombre;
+
     @Column(name = "fecha_nacimiento")
     private Date fechaNacimiento;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "posicion_favorita")
     private PosicionJuegoEntity posicionFavorita;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "posicion_opcional")
-    private PosicionJuegoEntity posicionOpcional;
+    private PosicionJuegoEntity posicionOpcional
+            ;
     @Column(name = "habilidad_piernas")
     private String habilidadPiernas;
     @ManyToMany()

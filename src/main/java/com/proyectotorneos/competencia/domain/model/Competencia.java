@@ -1,7 +1,7 @@
 package com.proyectotorneos.competencia.domain.model;
 
-import com.proyectotorneos.shared.domain.model.Identificable;
 import com.proyectotorneos.equipo.domain.model.Equipo;
+import com.proyectotorneos.shared.domain.model.Identificable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,9 +10,9 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
- @SuperBuilder
- @NoArgsConstructor
- @AllArgsConstructor
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public abstract class Competencia extends Identificable {

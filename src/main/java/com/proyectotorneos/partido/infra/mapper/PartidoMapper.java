@@ -18,8 +18,8 @@ public class PartidoMapper {
         PartidoEntity entity = new PartidoEntity();
 
         entity.setId(partido.getId());
-        entity.setEquipoLocal(actuacionMapper.toEntity(partido.getActuacionEquipoLocal()));
-        entity.setEquipoVisitante(actuacionMapper.toEntity(partido.getActuacionEquipoVisitante()));
+        entity.setEquipoLocal(actuacionMapper.toEntity(partido.getActuacionLocal()));
+        entity.setEquipoVisitante(actuacionMapper.toEntity(partido.getActuacionVisitante()));
         entity.setFecha(partido.getFecha());
         entity.setFinalizado(partido.isFinalizado());
 
@@ -30,8 +30,8 @@ public class PartidoMapper {
         Partido domain = new Partido();
 
         domain.setId(entity.getId());
-        domain.setActuacionEquipoLocal(actuacionMapper.toDomain(entity.getEquipoLocal()));
-        domain.setActuacionEquipoVisitante(actuacionMapper.toDomain(entity.getEquipoVisitante()));
+        domain.setActuacionLocal(actuacionMapper.toDomain(entity.getEquipoLocal()));
+        domain.setActuacionVisitante(actuacionMapper.toDomain(entity.getEquipoVisitante()));
         domain.setFecha(entity.getFecha());
         domain.setFinalizado(entity.isFinalizado());
 

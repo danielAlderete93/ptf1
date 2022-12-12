@@ -8,8 +8,8 @@ import com.proyectotorneos.shared.domain.validators.criterios.CriterioValidacion
 public class CriterioValidacionPuedeFinalizarPartido implements CriterioValidacion<Partido> {
     @Override
     public boolean esValido(Partido partido) {
-        return actuacionTieneJugadores(partido.getActuacionEquipoVisitante()) &&
-                actuacionTieneJugadores(partido.getActuacionEquipoLocal());
+        return actuacionTieneJugadores(partido.getActuacionVisitante()) &&
+                actuacionTieneJugadores(partido.getActuacionLocal());
     }
 
     @Override

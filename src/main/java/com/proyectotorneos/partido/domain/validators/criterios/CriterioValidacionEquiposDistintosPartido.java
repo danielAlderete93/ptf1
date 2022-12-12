@@ -8,8 +8,8 @@ import com.proyectotorneos.shared.domain.validators.criterios.CriterioValidacion
 public class CriterioValidacionEquiposDistintosPartido implements CriterioValidacion<Partido> {
     @Override
     public boolean esValido(Partido partido) {
-        Equipo equipoLocal = partido.getActuacionEquipoLocal().getEquipo();
-        Equipo equipoVisitante = partido.getActuacionEquipoVisitante().getEquipo();
+        Equipo equipoLocal = partido.getActuacionLocal().getEquipo();
+        Equipo equipoVisitante = partido.getActuacionVisitante().getEquipo();
 
         return !equipoLocal.equals(equipoVisitante);
     }

@@ -13,8 +13,8 @@ import java.util.List;
 public class CriterioValidacionGolesDebenPertenecerAUnJugadorParticipante implements CriterioValidacion<Partido> {
     @Override
     public boolean esValido(Partido partido) {
-        return golesFueronHechosPorJugadoresParticipantes(partido.getActuacionEquipoLocal()) ||
-                golesFueronHechosPorJugadoresParticipantes(partido.getActuacionEquipoVisitante());
+        return golesFueronHechosPorJugadoresParticipantes(partido.getActuacionLocal()) ||
+                golesFueronHechosPorJugadoresParticipantes(partido.getActuacionVisitante());
     }
 
     @Override

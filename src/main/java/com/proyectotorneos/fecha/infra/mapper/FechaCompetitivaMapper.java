@@ -1,9 +1,9 @@
 package com.proyectotorneos.fecha.infra.mapper;
 
 import com.proyectotorneos.fecha.domain.model.FechaCompetitiva;
-import com.proyectotorneos.partido.domain.model.Partido;
 import com.proyectotorneos.fecha.infra.entities.FechaCompetitivaEntity;
 import com.proyectotorneos.gol.infra.entities.PartidoEntity;
+import com.proyectotorneos.partido.domain.model.Partido;
 import com.proyectotorneos.partido.infra.mapper.PartidoMapper;
 import org.springframework.stereotype.Component;
 
@@ -46,6 +46,10 @@ public class FechaCompetitivaMapper {
     public FechaCompetitiva toDomain(FechaCompetitivaEntity entity) {
         FechaCompetitiva fechaCompetitiva = new FechaCompetitiva();
         List<Partido> partidoList;
+        if (null == entity) {
+            return null;
+        }
+
         fechaCompetitiva.setId(entity.getId());
         fechaCompetitiva.setNroFecha(entity.getNroFecha());
 

@@ -36,7 +36,7 @@ public class ControllerActuacionEquipo {
 
         actuacionEquipo.setId(request.actuacionID());
 
-        partido.setActuacionEquipoLocal(actuacionEquipo);
+        partido.setActuacionLocal(actuacionEquipo);
 
         partidoService.guarda(partido);
 
@@ -52,7 +52,7 @@ public class ControllerActuacionEquipo {
     @ResponseBody
     public ResponseEntity<ActuacionEquipoResponse> getLocal(@PathVariable Integer idPartido) {
         Partido partido = partidoService.buscaPorID(idPartido);
-        ActuacionEquipoResponse actuacionEquipo = actuacionEquipoRestMapper.toResponse(partido.getActuacionEquipoLocal());
+        ActuacionEquipoResponse actuacionEquipo = actuacionEquipoRestMapper.toResponse(partido.getActuacionLocal());
 
         return ResponseEntity.ok(actuacionEquipo);
     }
@@ -66,7 +66,7 @@ public class ControllerActuacionEquipo {
 
         actuacionEquipo.setId(request.actuacionID());
 
-        partido.setActuacionEquipoVisitante(actuacionEquipo);
+        partido.setActuacionVisitante(actuacionEquipo);
 
         partidoService.guarda(partido);
 
@@ -83,7 +83,7 @@ public class ControllerActuacionEquipo {
     @ResponseBody
     public ResponseEntity<ActuacionEquipoResponse> getVisitante(@PathVariable Integer idPartido) {
         Partido partido = partidoService.buscaPorID(idPartido);
-        ActuacionEquipoResponse actuacionEquipo = actuacionEquipoRestMapper.toResponse(partido.getActuacionEquipoVisitante());
+        ActuacionEquipoResponse actuacionEquipo = actuacionEquipoRestMapper.toResponse(partido.getActuacionVisitante());
 
         return ResponseEntity.ok(actuacionEquipo);
     }

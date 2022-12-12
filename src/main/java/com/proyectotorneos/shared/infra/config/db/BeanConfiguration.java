@@ -3,10 +3,12 @@ package com.proyectotorneos.shared.infra.config.db;
 import com.proyectotorneos.actuacion.domain.port.repositories.ActuacionEquipoRepository;
 import com.proyectotorneos.actuacion.domain.port.services.ActuacionEquipoService;
 import com.proyectotorneos.actuacion.domain.port.services.impl.DomainActuacionEquipoService;
+import com.proyectotorneos.competencia.domain.model.CompetenciaFaseEliminatoria;
 import com.proyectotorneos.competencia.domain.model.CompetenciaGrupo;
 import com.proyectotorneos.competencia.domain.model.CompetenciaLiga;
 import com.proyectotorneos.competencia.domain.port.repositories.CompetenciaRepository;
 import com.proyectotorneos.competencia.domain.port.services.CompetenciaService;
+import com.proyectotorneos.competencia.domain.port.services.impl.DomainCompetenciaFaseEliminatoria;
 import com.proyectotorneos.competencia.domain.port.services.impl.DomainCompetenciaGrupoService;
 import com.proyectotorneos.competencia.domain.port.services.impl.DomainCompetenciaLigaService;
 import com.proyectotorneos.equipo.domain.port.repositories.EquipoRepository;
@@ -91,6 +93,11 @@ public class BeanConfiguration {
     @Bean
     CompetenciaService<CompetenciaGrupo> competenciaGrupoService(CompetenciaRepository<CompetenciaGrupo> repository) {
         return new DomainCompetenciaGrupoService(repository);
+    }
+
+    @Bean
+    CompetenciaService<CompetenciaFaseEliminatoria> competenciaFaseEliminatoriaService(CompetenciaRepository<CompetenciaFaseEliminatoria> repository) {
+        return new DomainCompetenciaFaseEliminatoria(repository);
     }
 
 }

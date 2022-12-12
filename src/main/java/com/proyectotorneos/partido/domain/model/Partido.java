@@ -12,25 +12,25 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 public class Partido extends Identificable {
-    private ActuacionEquipo actuacionEquipoLocal;
-    private ActuacionEquipo actuacionEquipoVisitante;
+    private ActuacionEquipo actuacionLocal;
+    private ActuacionEquipo actuacionVisitante;
     private Date fecha;
     private boolean finalizado;
 
     public Integer cantGolesLocales() {
-        return actuacionEquipoLocal.cantGoles();
+        return actuacionLocal.cantGoles();
     }
 
     public Integer cantGolesVisitante() {
-        return actuacionEquipoVisitante.cantGoles();
+        return actuacionVisitante.cantGoles();
     }
 
     public String getNombreLocales() {
-        return this.actuacionEquipoLocal.getEquipo().getNombre();
+        return this.actuacionLocal.getEquipo().getNombre();
     }
 
     public String getNombreVisitante() {
-        return this.actuacionEquipoVisitante.getEquipo().getNombre();
+        return this.actuacionVisitante.getEquipo().getNombre();
     }
 
     public void finaliza() {
@@ -44,9 +44,9 @@ public class Partido extends Identificable {
         if (!super.equals(o)) return false;
 
         if (isFinalizado() != partido.isFinalizado()) return false;
-        if (getActuacionEquipoLocal() != null ? !getActuacionEquipoLocal().equals(partido.getActuacionEquipoLocal()) : partido.getActuacionEquipoLocal() != null)
+        if (getActuacionLocal() != null ? !getActuacionLocal().equals(partido.getActuacionLocal()) : partido.getActuacionLocal() != null)
             return false;
-        if (getActuacionEquipoVisitante() != null ? !getActuacionEquipoVisitante().equals(partido.getActuacionEquipoVisitante()) : partido.getActuacionEquipoVisitante() != null)
+        if (getActuacionVisitante() != null ? !getActuacionVisitante().equals(partido.getActuacionVisitante()) : partido.getActuacionVisitante() != null)
             return false;
         return getFecha() != null ? getFecha().equals(partido.getFecha()) : partido.getFecha() == null;
     }
@@ -54,8 +54,8 @@ public class Partido extends Identificable {
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (getActuacionEquipoLocal() != null ? getActuacionEquipoLocal().hashCode() : 0);
-        result = 31 * result + (getActuacionEquipoVisitante() != null ? getActuacionEquipoVisitante().hashCode() : 0);
+        result = 31 * result + (getActuacionLocal() != null ? getActuacionLocal().hashCode() : 0);
+        result = 31 * result + (getActuacionVisitante() != null ? getActuacionVisitante().hashCode() : 0);
         result = 31 * result + (getFecha() != null ? getFecha().hashCode() : 0);
         result = 31 * result + (isFinalizado() ? 1 : 0);
         return result;

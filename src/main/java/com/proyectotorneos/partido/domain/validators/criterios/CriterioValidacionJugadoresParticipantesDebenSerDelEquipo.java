@@ -9,8 +9,8 @@ public class CriterioValidacionJugadoresParticipantesDebenSerDelEquipo implement
 
     @Override
     public boolean esValido(Partido partido) {
-        return jugadoresCorrespondeAEquipo(partido.getActuacionEquipoVisitante()) &&
-                jugadoresCorrespondeAEquipo(partido.getActuacionEquipoLocal());
+        return jugadoresCorrespondeAEquipo(partido.getActuacionVisitante()) &&
+                jugadoresCorrespondeAEquipo(partido.getActuacionLocal());
     }
 
     @Override
