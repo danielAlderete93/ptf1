@@ -1,12 +1,12 @@
 package com.proyectotorneos.tipo_habilidad.domain.model;
 
 import com.proyectotorneos.shared.domain.model.Identificable;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class TipoHabilidad extends Identificable {
     private String nombre;

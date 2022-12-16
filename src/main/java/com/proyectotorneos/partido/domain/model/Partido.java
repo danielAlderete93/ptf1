@@ -1,19 +1,25 @@
 package com.proyectotorneos.partido.domain.model;
 
 import com.proyectotorneos.actuacion.domain.model.ActuacionEquipo;
+import com.proyectotorneos.equipo.domain.model.Equipo;
 import com.proyectotorneos.shared.domain.model.Identificable;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
 
 @Getter
 @Setter
+@SuperBuilder
+@AllArgsConstructor
 @NoArgsConstructor
 public class Partido extends Identificable {
     private ActuacionEquipo actuacionLocal;
     private ActuacionEquipo actuacionVisitante;
+
     private Date fecha;
     private boolean finalizado;
 
@@ -25,17 +31,39 @@ public class Partido extends Identificable {
         return actuacionVisitante.cantGoles();
     }
 
-    public String getNombreLocales() {
-        return this.actuacionLocal.getEquipo().getNombre();
+    public Equipo getEquipoLocal() {
+        return this.actuacionLocal.getEquipo();
     }
 
-    public String getNombreVisitante() {
-        return this.actuacionVisitante.getEquipo().getNombre();
+    public Equipo getEquipoVisitante() {
+        return this.actuacionVisitante.getEquipo();
     }
 
     public void finaliza() {
         this.setFinalizado(true);
     }
+
+    public boolean ganaronLocales() {
+        if (fueEmpate() || !finalizado) {
+            return false;
+        }
+
+        return cantGolesLocales() > cantGolesVisitante();
+    }
+
+    public boolean ganaronVisitante() {
+        if (fueEmpate() || !finalizado) {
+            return false;
+        }
+
+        return cantGolesLocales() < cantGolesVisitante();
+    }
+
+
+    public boolean fueEmpate() {
+        return cantGolesLocales().equals(cantGolesVisitante());
+    }
+
 
     @Override
     public boolean equals(Object o) {

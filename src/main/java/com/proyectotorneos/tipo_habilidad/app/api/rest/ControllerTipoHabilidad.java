@@ -52,11 +52,13 @@ public class ControllerTipoHabilidad {
     @ResponseBody
     public ResponseEntity<MessageResponse> add(@RequestBody TipoHabilidadRequest request) {
         MessageResponse messageResponse;
+
         tipoHabilidadService.guarda(mapper.toDomain(request));
         messageResponse = new MessageResponse(
                 "Nuevo tipo de habilidad",
                 "Se salvo correctamente el tipo de habilidad."
         );
+
         return new ResponseEntity<>(messageResponse, HttpStatus.CREATED);
     }
 }

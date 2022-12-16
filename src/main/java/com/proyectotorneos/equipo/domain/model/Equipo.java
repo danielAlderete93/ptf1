@@ -2,14 +2,18 @@ package com.proyectotorneos.equipo.domain.model;
 
 import com.proyectotorneos.shared.domain.model.Identificable;
 import com.proyectotorneos.jugador.domain.model.Jugador;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
 @Getter
 @Setter
+@SuperBuilder
+@AllArgsConstructor
 @NoArgsConstructor
 public class Equipo extends Identificable {
     private String nombre;

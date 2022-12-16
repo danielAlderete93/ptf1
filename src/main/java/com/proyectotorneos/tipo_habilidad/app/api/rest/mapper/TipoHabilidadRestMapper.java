@@ -23,15 +23,13 @@ public class TipoHabilidadRestMapper {
     }
 
     public TipoHabilidad toDomain(TipoHabilidadRequest request) {
-        TipoHabilidad tipoHabilidad = new TipoHabilidad();
-
         if (request == null) {
             return null;
         }
 
-        tipoHabilidad.setDescripcion(request.descripcion());
-        tipoHabilidad.setNombre(request.nombre());
-
-        return tipoHabilidad;
+        return TipoHabilidad.builder()
+                .descripcion(request.descripcion())
+                .nombre(request.nombre())
+                .build();
     }
 }

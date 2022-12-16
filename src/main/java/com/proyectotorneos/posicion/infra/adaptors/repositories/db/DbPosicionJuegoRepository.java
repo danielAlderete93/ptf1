@@ -1,9 +1,9 @@
 package com.proyectotorneos.posicion.infra.adaptors.repositories.db;
 
+import com.proyectotorneos.partido.infra.entities.PosicionJuegoEntity;
 import com.proyectotorneos.posicion.domain.model.PosicionJuego;
 import com.proyectotorneos.posicion.domain.port.repositories.PosicionJuegoRepository;
 import com.proyectotorneos.posicion.infra.adaptors.repositories.PosicionJuegoRepositoryJPA;
-import com.proyectotorneos.partido.infra.entities.PosicionJuegoEntity;
 import com.proyectotorneos.posicion.infra.mapper.PosicionJuegoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -33,7 +33,8 @@ public class DbPosicionJuegoRepository implements PosicionJuegoRepository {
     @Override
     public PosicionJuego getById(Integer id) {
         PosicionJuegoEntity entity;
-        entity = posicionJuegoRepositoryJPA.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso no encontrado"));
+        entity = posicionJuegoRepositoryJPA.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Recurso no encontrado"));
 
         return posicionJuegoMapper.toDomain(entity);
     }
@@ -49,11 +50,12 @@ public class DbPosicionJuegoRepository implements PosicionJuegoRepository {
 
     @Override
     public List<PosicionJuego> getAll() {
-        List<PosicionJuegoEntity> listEntities;
-        listEntities = posicionJuegoRepositoryJPA.findAll();
 
-
-        return listEntities.stream().map(posicionJuegoMapper::toDomain).toList();
+        return posicionJuegoRepositoryJPA.findAll()
+                .stream()
+                .map(posicionJuegoMapper::toDomain)
+                .toList()
+                ;
     }
 
     @Override

@@ -15,24 +15,22 @@ public class PartidoGolMapper {
 
 
     public PartidoGolEntity toEntity(PartidoGol gol) {
-        PartidoGolEntity entity = new PartidoGolEntity();
 
-        entity.setId(gol.getId());
-        entity.setDescripcion(gol.getDescripcion());
-        entity.setTiempo(gol.getTiempo());
-        entity.setJugador(jugadorMapper.toEntity(gol.getJugador()));
-
-        return entity;
+        return PartidoGolEntity.builder()
+                .id(gol.getId())
+                .descripcion(gol.getDescripcion())
+                .tiempo(gol.getTiempo())
+                .jugador(jugadorMapper.toEntity(gol.getJugador()))
+                .build();
     }
 
     public PartidoGol toDomain(PartidoGolEntity entity) {
-        PartidoGol gol = new PartidoGol();
 
-        gol.setId(entity.getId());
-        gol.setDescripcion(entity.getDescripcion());
-        gol.setTiempo(entity.getTiempo());
-        gol.setJugador(jugadorMapper.toDomain(entity.getJugador()));
-
-        return gol;
+        return PartidoGol.builder()
+                .id(entity.getId())
+                .tiempo(entity.getTiempo())
+                .descripcion(entity.getDescripcion())
+                .jugador(jugadorMapper.toDomain(entity.getJugador()))
+                .build();
     }
 }

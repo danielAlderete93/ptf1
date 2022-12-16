@@ -62,9 +62,9 @@ public class ControllerPartido {
         messageResponse = new MessageResponse(
                 "Nuevo partido",
                 "Se salvo correctamente el partido entre " +
-                        partido.getNombreLocales() +
+                        partido.getEquipoLocal().getNombre() +
                         " vs " +
-                        partido.getNombreVisitante()
+                        partido.getEquipoVisitante().getNombre()
         );
 
         return new ResponseEntity<>(messageResponse, HttpStatus.CREATED);
@@ -78,8 +78,13 @@ public class ControllerPartido {
 
         partidoService.finaliza(partido);
 
-        messageResponse = new MessageResponse("Se finalizo partido"
-                , "Partido entre " + partido.getNombreLocales() + " vs " + partido.getNombreVisitante() + " finalizado"
+        messageResponse = new MessageResponse(
+                "Se finalizo partido"
+                , "Partido entre "
+                + partido.getEquipoLocal().getNombre()
+                + " vs "
+                + partido.getEquipoVisitante().getNombre()
+                + " finalizado"
         );
 
         return ResponseEntity.ok(messageResponse);

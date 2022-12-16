@@ -21,14 +21,11 @@ public class FechaCompetitivaMapper {
     }
 
     public FechaCompetitivaEntity toEntity(FechaCompetitiva fechaCompetitiva) {
-        FechaCompetitivaEntity entity = new FechaCompetitivaEntity();
         List<PartidoEntity> partidoEntityList;
 
         if (fechaCompetitiva == null) {
             return null;
         }
-
-        entity.setNroFecha(fechaCompetitiva.getNroFecha());
 
         if (fechaCompetitiva.getPartidos() == null) {
             partidoEntityList = new ArrayList<>();
@@ -37,21 +34,20 @@ public class FechaCompetitivaMapper {
         }
 
 
-        entity.setPartidos(partidoEntityList);
-
-        return entity;
+        return FechaCompetitivaEntity.builder()
+                .nroFecha(fechaCompetitiva.getNroFecha())
+                .partidos(partidoEntityList)
+                .build();
     }
 
 
     public FechaCompetitiva toDomain(FechaCompetitivaEntity entity) {
-        FechaCompetitiva fechaCompetitiva = new FechaCompetitiva();
         List<Partido> partidoList;
+
         if (null == entity) {
             return null;
         }
 
-        fechaCompetitiva.setId(entity.getId());
-        fechaCompetitiva.setNroFecha(entity.getNroFecha());
 
         if (entity.getPartidos() == null) {
             partidoList = new ArrayList<>();
@@ -62,8 +58,10 @@ public class FechaCompetitivaMapper {
             ;
         }
 
-        fechaCompetitiva.setPartidos(partidoList);
-
-        return fechaCompetitiva;
+        return FechaCompetitiva.builder()
+                .id(entity.getId())
+                .nroFecha(entity.getNroFecha())
+                .partidos(partidoList)
+                .build();
     }
 }

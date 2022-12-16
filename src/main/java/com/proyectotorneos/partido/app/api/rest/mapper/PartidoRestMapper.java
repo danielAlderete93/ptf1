@@ -1,11 +1,11 @@
 package com.proyectotorneos.partido.app.api.rest.mapper;
 
 import com.proyectotorneos.actuacion.app.api.rest.mapper.ActuacionEquipoRestMapper;
+import com.proyectotorneos.actuacion.domain.model.ActuacionEquipo;
+import com.proyectotorneos.equipo.domain.port.service.EquipoService;
 import com.proyectotorneos.partido.app.api.rest.dto.PartidoRequest;
 import com.proyectotorneos.partido.app.api.rest.dto.PartidoResponse;
-import com.proyectotorneos.actuacion.domain.model.ActuacionEquipo;
 import com.proyectotorneos.partido.domain.model.Partido;
-import com.proyectotorneos.equipo.domain.port.service.EquipoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -40,33 +40,25 @@ public class PartidoRestMapper {
     }
 
     public Partido toDomain(PartidoRequest request) {
-        Partido partido;
-        ActuacionEquipo locales;
-        ActuacionEquipo visitante;
 
         if (request == null) {
             return null;
         }
 
-        partido = new Partido();
+        return Partido.builder()
+                .fecha(request.fecha())
+                .finalizado(false)
+                .actuacionLocal(getActuacionByEquipoID(request.idEquipoLocal()))
+                .actuacionVisitante(getActuacionByEquipoID(request.idEquipoVisitante()))
+                .build();
+    }
 
-        partido.setFecha(request.fecha());
-        partido.setFinalizado(false);
-
-        locales = new ActuacionEquipo();
-        locales.setGoles(new ArrayList<>());
-        locales.setJugadoresParticipante(new ArrayList<>());
-        locales.setEquipo(equipoService.buscaPorID(request.idEquipoLocal()));
-
-        visitante = new ActuacionEquipo();
-        visitante.setGoles(new ArrayList<>());
-        visitante.setJugadoresParticipante(new ArrayList<>());
-        visitante.setEquipo(equipoService.buscaPorID(request.idEquipoVisitante()));
-
-        partido.setActuacionLocal(locales);
-        partido.setActuacionVisitante(visitante);
-
-
-        return partido;
+    private ActuacionEquipo getActuacionByEquipoID(Integer idEquipo) {
+        ActuacionEquipo actuacion;
+        actuacion = new ActuacionEquipo();
+        actuacion.setGoles(new ArrayList<>());
+        actuacion.setJugadoresParticipante(new ArrayList<>());
+        actuacion.setEquipo(equipoService.buscaPorID(idEquipo));
+        return actuacion;
     }
 }

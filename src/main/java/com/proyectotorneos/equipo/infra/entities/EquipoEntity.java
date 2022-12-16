@@ -3,16 +3,20 @@ package com.proyectotorneos.equipo.infra.entities;
 import com.proyectotorneos.shared.infra.entities.EntidadPersistente;
 import com.proyectotorneos.jugador.infra.entities.JugadorEntity;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
 @Entity
 @Table(name = "equipo")
+@SuperBuilder
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class EquipoEntity extends EntidadPersistente {
     @Column(name = "nombre")

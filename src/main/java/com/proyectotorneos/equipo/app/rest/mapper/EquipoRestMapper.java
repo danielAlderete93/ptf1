@@ -22,10 +22,11 @@ public class EquipoRestMapper {
     }
 
     public Equipo toDomain(EquipoRequest request) {
-        Equipo equipo = new Equipo();
-        equipo.setNombre(request.nombre());
-        equipo.setUrlEscudo(request.urlEscudo());
-        equipo.setUrlPlantel(request.urlPlantel());
-        return equipo;
+
+        return Equipo.builder()
+                .nombre(request.nombre())
+                .urlPlantel(request.urlPlantel())
+                .urlEscudo(request.urlEscudo())
+                .build();
     }
 }

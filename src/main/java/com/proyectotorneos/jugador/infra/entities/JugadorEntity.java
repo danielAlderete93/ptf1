@@ -1,18 +1,22 @@
 package com.proyectotorneos.jugador.infra.entities;
 
 import com.proyectotorneos.habilidad.infra.entities.HabilidadJugadorEntity;
-import com.proyectotorneos.shared.infra.entities.EntidadPersistente;
 import com.proyectotorneos.partido.infra.entities.PosicionJuegoEntity;
+import com.proyectotorneos.shared.infra.entities.EntidadPersistente;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "jugadores")
-@Builder(toBuilder = true)
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@SuperBuilder
+@AllArgsConstructor
 @Setter
 @Getter
 @NoArgsConstructor
@@ -29,8 +33,7 @@ public class JugadorEntity extends EntidadPersistente {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "posicion_opcional")
-    private PosicionJuegoEntity posicionOpcional
-            ;
+    private PosicionJuegoEntity posicionOpcional;
     @Column(name = "habilidad_piernas")
     private String habilidadPiernas;
     @ManyToMany()

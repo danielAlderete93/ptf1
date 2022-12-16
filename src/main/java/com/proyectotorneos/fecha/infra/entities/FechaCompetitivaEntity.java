@@ -1,18 +1,22 @@
 package com.proyectotorneos.fecha.infra.entities;
 
-import com.proyectotorneos.shared.infra.entities.EntidadPersistente;
 import com.proyectotorneos.gol.infra.entities.PartidoEntity;
+import com.proyectotorneos.shared.infra.entities.EntidadPersistente;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
 @Entity
 @Table(name = "fechas_competitivas")
+@SuperBuilder
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class FechaCompetitivaEntity extends EntidadPersistente {
 

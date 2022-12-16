@@ -22,16 +22,13 @@ public class PosicionJuegoRestMapper {
     }
 
     public PosicionJuego toDomain(PosicionJuegoRequest request) {
-        PosicionJuego posicionJuego = new PosicionJuego();
-
         if (request == null) {
             return null;
         }
 
-
-        posicionJuego.setDescripcion(request.descripcion());
-        posicionJuego.setNombre(request.nombre());
-
-        return posicionJuego;
+        return PosicionJuego.builder()
+                .nombre(request.nombre())
+                .descripcion(request.descripcion())
+                .build();
     }
 }

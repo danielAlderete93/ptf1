@@ -1,13 +1,14 @@
 package com.proyectotorneos.posicion.domain.model;
 
 import com.proyectotorneos.shared.domain.model.Identificable;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
+@SuperBuilder
 @NoArgsConstructor
+@AllArgsConstructor
 public class PosicionJuego extends Identificable {
     private String nombre;
     private String descripcion;

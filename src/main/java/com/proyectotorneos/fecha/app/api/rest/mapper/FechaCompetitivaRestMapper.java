@@ -1,11 +1,11 @@
 package com.proyectotorneos.fecha.app.api.rest.mapper;
 
-import com.proyectotorneos.partido.app.api.rest.mapper.PartidoRestMapper;
 import com.proyectotorneos.fecha.app.api.rest.dto.FechaCompetitivaRequest;
 import com.proyectotorneos.fecha.app.api.rest.dto.FechaCompetitivaResponse;
 import com.proyectotorneos.fecha.domain.model.FechaCompetitiva;
-import com.proyectotorneos.shared.domain.model.Identificable;
+import com.proyectotorneos.partido.app.api.rest.mapper.PartidoRestMapper;
 import com.proyectotorneos.partido.domain.model.Partido;
+import com.proyectotorneos.shared.domain.model.Identificable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -35,22 +35,20 @@ public class FechaCompetitivaRestMapper {
     }
 
     public FechaCompetitiva toDomain(FechaCompetitivaRequest request) {
-        FechaCompetitiva fechaCompetitiva = new FechaCompetitiva();
         List<Partido> partidoList;
+
         if (request == null) {
             return null;
         }
-
-        fechaCompetitiva.setNroFecha(request.nroFecha());
 
         partidoList = request.partidoRequests().stream()
                 .map(partidoRestMapper::toDomain)
                 .collect(Collectors.toList())
         ;
 
-        fechaCompetitiva.setPartidos(partidoList);
-
-
-        return fechaCompetitiva;
+        return FechaCompetitiva.builder()
+                .nroFecha(request.nroFecha())
+                .partidos(partidoList)
+                .build();
     }
 }

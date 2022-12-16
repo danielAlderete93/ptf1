@@ -4,15 +4,16 @@ import com.proyectotorneos.shared.infra.entities.EntidadPersistente;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "posiciones_juego")
 @Getter
 @Setter
+@SuperBuilder
 @NoArgsConstructor
+@AllArgsConstructor
 public class PosicionJuegoEntity extends EntidadPersistente {
     @Column(name = "nombre")
     private String nombre;

@@ -1,14 +1,13 @@
 package com.proyectotorneos.actuacion.app.api.rest.mapper;
 
-import com.proyectotorneos.actuacion.app.api.rest.dto.ActuacionPartidoRequest;
 import com.proyectotorneos.actuacion.app.api.rest.dto.ActuacionEquipoResponse;
+import com.proyectotorneos.actuacion.app.api.rest.dto.ActuacionPartidoRequest;
+import com.proyectotorneos.actuacion.domain.model.ActuacionEquipo;
+import com.proyectotorneos.equipo.domain.port.service.EquipoService;
 import com.proyectotorneos.gol.app.api.rest.dto.PartidoGolResponse;
 import com.proyectotorneos.gol.app.api.rest.mapper.PartidoGolRestMapper;
-import com.proyectotorneos.actuacion.domain.model.ActuacionEquipo;
-import com.proyectotorneos.equipo.domain.model.Equipo;
-import com.proyectotorneos.jugador.domain.model.Jugador;
 import com.proyectotorneos.gol.domain.model.PartidoGol;
-import com.proyectotorneos.equipo.domain.port.service.EquipoService;
+import com.proyectotorneos.jugador.domain.model.Jugador;
 import com.proyectotorneos.jugador.domain.port.services.JugadorService;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +30,7 @@ public class ActuacionEquipoRestMapper {
     public ActuacionEquipoResponse toResponse(ActuacionEquipo actuacionEquipo) {
         List<String> nombreJugadores;
         List<PartidoGolResponse> golResponses;
+
         if (actuacionEquipo == null) {
             return null;
         }
@@ -58,15 +58,13 @@ public class ActuacionEquipoRestMapper {
 
 
     public ActuacionEquipo toDomain(ActuacionPartidoRequest request) {
-        ActuacionEquipo actuacionEquipo = new ActuacionEquipo();
-        Equipo equipo;
         List<PartidoGol> goles;
         List<Jugador> jugadorList;
+
         if (request == null) {
             return null;
         }
 
-        equipo = equipoService.buscaPorID(request.equipoID());
         jugadorList = request.jugadoresParticipante().stream()
                 .map(jugadorService::buscaPorID)
                 .collect(Collectors.toList());
@@ -75,12 +73,10 @@ public class ActuacionEquipoRestMapper {
                 .map(partidoGolRestMapper::toDomain)
                 .collect(Collectors.toList());
 
-        actuacionEquipo.setEquipo(equipo);
-        actuacionEquipo.setJugadoresParticipante(jugadorList);
-        actuacionEquipo.setGoles(goles);
-
-
-        return actuacionEquipo;
-
+        return ActuacionEquipo.builder()
+                .equipo(equipoService.buscaPorID(request.equipoID()))
+                .jugadoresParticipante(jugadorList)
+                .goles(goles)
+                .build();
     }
 }

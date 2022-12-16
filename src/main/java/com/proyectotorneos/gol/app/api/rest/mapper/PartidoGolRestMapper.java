@@ -18,6 +18,7 @@ public class PartidoGolRestMapper {
     }
 
     public PartidoGolResponse toResponse(PartidoGol partidoGol) {
+
         if (partidoGol == null) {
             return null;
         }
@@ -31,17 +32,16 @@ public class PartidoGolRestMapper {
     }
 
     public PartidoGol toDomain(PartidoGolRequest request) {
-        PartidoGol partidoGol = new PartidoGol();
+
         if (request == null) {
             return null;
         }
 
-        partidoGol.setDescripcion(request.descripcion());
-        partidoGol.setTiempo(request.tiempo());
-        partidoGol.setJugador(jugadorService.buscaPorID(request.jugadorID()));
-
-
-        return partidoGol;
+        return PartidoGol.builder()
+                .descripcion(request.descripcion())
+                .tiempo(request.tiempo())
+                .jugador(jugadorService.buscaPorID(request.jugadorID()))
+                .build();
 
     }
 }

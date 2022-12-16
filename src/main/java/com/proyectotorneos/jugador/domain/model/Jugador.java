@@ -4,13 +4,14 @@ import com.proyectotorneos.shared.domain.model.Identificable;
 import com.proyectotorneos.posicion.domain.model.PosicionJuego;
 import com.proyectotorneos.habilidad.domain.model.HabilidadJugador;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Jugador extends Identificable {

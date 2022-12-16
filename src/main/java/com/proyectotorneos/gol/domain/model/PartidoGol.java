@@ -1,13 +1,14 @@
 package com.proyectotorneos.gol.domain.model;
 
-import com.proyectotorneos.shared.domain.model.Identificable;
 import com.proyectotorneos.jugador.domain.model.Jugador;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.proyectotorneos.shared.domain.model.Identificable;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
+@SuperBuilder
+@AllArgsConstructor
 @NoArgsConstructor
 public class PartidoGol extends Identificable {
     private Jugador jugador;
