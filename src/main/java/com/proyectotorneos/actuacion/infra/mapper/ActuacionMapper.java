@@ -1,14 +1,16 @@
 package com.proyectotorneos.actuacion.infra.mapper;
 
 import com.proyectotorneos.actuacion.domain.model.ActuacionEquipo;
-import com.proyectotorneos.jugador.domain.model.Jugador;
-import com.proyectotorneos.gol.domain.model.PartidoGol;
 import com.proyectotorneos.actuacion.infra.entities.ActuacionEquipoEntity;
-import com.proyectotorneos.jugador.infra.entities.JugadorEntity;
-import com.proyectotorneos.posicion.infra.entities.PartidoGolEntity;
+import com.proyectotorneos.equipo.domain.model.Equipo;
+import com.proyectotorneos.equipo.infra.entities.EquipoEntity;
 import com.proyectotorneos.equipo.infra.mappers.EquipoMapper;
-import com.proyectotorneos.jugador.infra.mapper.JugadorMapper;
+import com.proyectotorneos.gol.domain.model.PartidoGol;
 import com.proyectotorneos.gol.infra.mapper.PartidoGolMapper;
+import com.proyectotorneos.jugador.domain.model.Jugador;
+import com.proyectotorneos.jugador.infra.entities.JugadorEntity;
+import com.proyectotorneos.jugador.infra.mapper.JugadorMapper;
+import com.proyectotorneos.posicion.infra.entities.PartidoGolEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -29,51 +31,73 @@ public class ActuacionMapper {
     }
 
     public ActuacionEquipoEntity toEntity(ActuacionEquipo domain) {
-        ActuacionEquipoEntity entity = new ActuacionEquipoEntity();
-
+        EquipoEntity equipoEntity;
         List<JugadorEntity> jugadorEntityList;
         List<PartidoGolEntity> partidoGolEntities;
 
-        entity.setId(domain.getId());
+        jugadorEntityList = getJugadorEntities(domain);
 
-        jugadorEntityList = domain.getJugadoresParticipante().stream().map(jugadorMapper::toEntity).toList();
-        entity.setJugadores(jugadorEntityList);
+        partidoGolEntities = getPartidoGolEntities(domain);
 
-        entity.setEquipo(equipoMapper.toEntity(domain.getEquipo()));
+        equipoEntity = equipoMapper.toEntity(domain.getEquipo());
 
-        if( null != domain.getGoles()){
-            partidoGolEntities = domain.getGoles().stream().map(partidoGolMapper::toEntity).toList();
-        }else{
-            partidoGolEntities = new ArrayList<>();
-        }
-
-
-
-
-        entity.setGoles(partidoGolEntities);
-
-
-        return entity;
+        return ActuacionEquipoEntity.builder()
+                .id(domain.getId())
+                .jugadores(jugadorEntityList)
+                .goles(partidoGolEntities)
+                .equipo(equipoEntity)
+                .build();
     }
 
 
     public ActuacionEquipo toDomain(ActuacionEquipoEntity entity) {
-        ActuacionEquipo domain = new ActuacionEquipo();
+        Equipo equipo;
         List<Jugador> jugadores;
         List<PartidoGol> partidoGoles;
 
-        domain.setId(entity.getId());
 
-        jugadores = entity.getJugadores().stream().map(jugadorMapper::toDomain).toList();
-        domain.setJugadoresParticipante(jugadores);
+        jugadores = getJugadores(entity);
 
-        domain.setEquipo(equipoMapper.toDomain(entity.getEquipo()));
+        equipo = equipoMapper.toDomain(entity.getEquipo());
 
-        partidoGoles = entity.getGoles().stream().map(partidoGolMapper::toDomain).toList();
-        domain.setGoles(partidoGoles);
+        partidoGoles = getGoles(entity);
 
 
-        return domain;
+        return ActuacionEquipo.builder()
+                .id(entity.getId())
+                .jugadoresParticipante(jugadores)
+                .equipo(equipo)
+                .goles(partidoGoles)
+                .build();
     }
+
+    private List<Jugador> getJugadores(ActuacionEquipoEntity entity) {
+        List<Jugador> jugadores;
+        jugadores = entity.getJugadores().stream().map(jugadorMapper::toDomain).toList();
+        return jugadores;
+    }
+
+    private List<PartidoGol> getGoles(ActuacionEquipoEntity entity) {
+        List<PartidoGol> partidoGoles;
+        partidoGoles = entity.getGoles().stream().map(partidoGolMapper::toDomain).toList();
+        return partidoGoles;
+    }
+
+    private List<PartidoGolEntity> getPartidoGolEntities(ActuacionEquipo domain) {
+        List<PartidoGolEntity> partidoGolEntities;
+        if (null != domain.getGoles()) {
+            partidoGolEntities = domain.getGoles().stream().map(partidoGolMapper::toEntity).toList();
+        } else {
+            partidoGolEntities = new ArrayList<>();
+        }
+        return partidoGolEntities;
+    }
+
+    private List<JugadorEntity> getJugadorEntities(ActuacionEquipo domain) {
+        List<JugadorEntity> jugadorEntityList;
+        jugadorEntityList = domain.getJugadoresParticipante().stream().map(jugadorMapper::toEntity).toList();
+        return jugadorEntityList;
+    }
+
 
 }

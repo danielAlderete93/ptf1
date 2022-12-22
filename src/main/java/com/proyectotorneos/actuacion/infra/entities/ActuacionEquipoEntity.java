@@ -1,19 +1,20 @@
 package com.proyectotorneos.actuacion.infra.entities;
 
-import com.proyectotorneos.shared.infra.entities.EntidadPersistente;
 import com.proyectotorneos.equipo.infra.entities.EquipoEntity;
 import com.proyectotorneos.jugador.infra.entities.JugadorEntity;
 import com.proyectotorneos.posicion.infra.entities.PartidoGolEntity;
+import com.proyectotorneos.shared.infra.entities.EntidadPersistente;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "actuaciones")
+@SuperBuilder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,10 +27,10 @@ public class ActuacionEquipoEntity extends EntidadPersistente {
             name = "actuacion_equipo_x_jugador",
             joinColumns = @JoinColumn(name = "actuacion_id"),
             inverseJoinColumns = @JoinColumn(name = "jugador_id"))
-    private List<JugadorEntity> jugadores = new ArrayList<>();
+    private List<JugadorEntity> jugadores;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "gol")
-    private List<PartidoGolEntity> goles = new ArrayList<>();
+    private List<PartidoGolEntity> goles;
 
     @Override
     public boolean equals(Object o) {

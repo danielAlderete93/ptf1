@@ -28,14 +28,7 @@ public class EquipoMapper {
             return null;
         }
 
-        if (equipo.getJugadores() == null) {
-            jugadorEntityList = new ArrayList<>();
-        } else {
-            jugadorEntityList = equipo.getJugadores().stream()
-                    .map(jugadorMapper::toEntity)
-                    .toList()
-            ;
-        }
+        jugadorEntityList = getJugadorEntities(equipo);
 
 
         return EquipoEntity.builder()
@@ -48,6 +41,7 @@ public class EquipoMapper {
 
     }
 
+
     public Equipo toDomain(EquipoEntity equipoEntity) {
         List<Jugador> jugadorList;
 
@@ -55,15 +49,7 @@ public class EquipoMapper {
             return null;
         }
 
-
-        if (equipoEntity.getJugadores() == null) {
-            jugadorList = new ArrayList<>();
-        } else {
-            jugadorList = equipoEntity.getJugadores().stream()
-                    .map(jugadorMapper::toDomain)
-                    .collect(Collectors.toList())
-            ;
-        }
+        jugadorList = getJugadors(equipoEntity);
 
 
         return Equipo.builder()
@@ -73,6 +59,32 @@ public class EquipoMapper {
                 .urlPlantel(equipoEntity.getUrlPlantel())
                 .jugadores(jugadorList)
                 .build();
+    }
+
+    private List<JugadorEntity> getJugadorEntities(Equipo equipo) {
+        List<JugadorEntity> jugadorEntityList;
+        if (equipo.getJugadores() == null) {
+            jugadorEntityList = new ArrayList<>();
+        } else {
+            jugadorEntityList = equipo.getJugadores().stream()
+                    .map(jugadorMapper::toEntity)
+                    .toList()
+            ;
+        }
+        return jugadorEntityList;
+    }
+
+    private List<Jugador> getJugadors(EquipoEntity equipoEntity) {
+        List<Jugador> jugadorList;
+        if (equipoEntity.getJugadores() == null) {
+            jugadorList = new ArrayList<>();
+        } else {
+            jugadorList = equipoEntity.getJugadores().stream()
+                    .map(jugadorMapper::toDomain)
+                    .collect(Collectors.toList())
+            ;
+        }
+        return jugadorList;
     }
 
 

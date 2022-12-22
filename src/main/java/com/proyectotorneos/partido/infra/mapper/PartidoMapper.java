@@ -1,8 +1,10 @@
 package com.proyectotorneos.partido.infra.mapper;
 
+import com.proyectotorneos.actuacion.domain.model.ActuacionEquipo;
+import com.proyectotorneos.actuacion.infra.entities.ActuacionEquipoEntity;
 import com.proyectotorneos.actuacion.infra.mapper.ActuacionMapper;
-import com.proyectotorneos.partido.domain.model.Partido;
 import com.proyectotorneos.gol.infra.entities.PartidoEntity;
+import com.proyectotorneos.partido.domain.model.Partido;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,28 +17,36 @@ public class PartidoMapper {
     }
 
     public PartidoEntity toEntity(Partido partido) {
-        PartidoEntity entity = new PartidoEntity();
+        ActuacionEquipoEntity locales;
+        ActuacionEquipoEntity visitante;
 
-        entity.setId(partido.getId());
-        entity.setEquipoLocal(actuacionMapper.toEntity(partido.getActuacionLocal()));
-        entity.setEquipoVisitante(actuacionMapper.toEntity(partido.getActuacionVisitante()));
-        entity.setFecha(partido.getFecha());
-        entity.setFinalizado(partido.isFinalizado());
+        locales = actuacionMapper.toEntity(partido.getActuacionLocal());
+        visitante = actuacionMapper.toEntity(partido.getActuacionVisitante());
 
-        return entity;
+
+        return PartidoEntity.builder()
+                .id(partido.getId())
+                .actuacionLocal(locales)
+                .actuacionVisitante(visitante)
+                .fecha(partido.getFecha())
+                .finalizado(partido.isFinalizado())
+                .build();
     }
 
     public Partido toDomain(PartidoEntity entity) {
-        Partido domain = new Partido();
+        ActuacionEquipo locales;
+        ActuacionEquipo visitante;
 
-        domain.setId(entity.getId());
-        domain.setActuacionLocal(actuacionMapper.toDomain(entity.getEquipoLocal()));
-        domain.setActuacionVisitante(actuacionMapper.toDomain(entity.getEquipoVisitante()));
-        domain.setFecha(entity.getFecha());
-        domain.setFinalizado(entity.isFinalizado());
+        locales = actuacionMapper.toDomain(entity.getActuacionLocal());
+        visitante = actuacionMapper.toDomain(entity.getActuacionVisitante());
 
-
-        return domain;
+        return Partido.builder()
+                .id(entity.getId())
+                .actuacionLocal(locales)
+                .actuacionVisitante(visitante)
+                .fecha(entity.getFecha())
+                .finalizado(entity.isFinalizado())
+                .build();
     }
 
 

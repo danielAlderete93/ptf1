@@ -7,18 +7,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class TipoHabilidadMapper {
     public TipoHabilidadEntity toEntity(TipoHabilidad tipoHabilidad) {
-        TipoHabilidadEntity entity = new TipoHabilidadEntity();
-        entity.setId(tipoHabilidad.getId());
-        entity.setDescripcion(tipoHabilidad.getDescripcion());
-        entity.setNombre(tipoHabilidad.getNombre());
-        return entity;
+        return TipoHabilidadEntity.builder()
+                .id(tipoHabilidad.getId())
+                .descripcion(tipoHabilidad.getDescripcion())
+                .nombre(tipoHabilidad.getNombre())
+                .build();
     }
 
     public TipoHabilidad toDomain(TipoHabilidadEntity tipoHabilidadEntity) {
-        TipoHabilidad tipoHabilidad = new TipoHabilidad();
-        tipoHabilidad.setId(tipoHabilidadEntity.getId());
-        tipoHabilidad.setDescripcion(tipoHabilidadEntity.getDescripcion());
-        tipoHabilidad.setNombre(tipoHabilidadEntity.getNombre());
-        return tipoHabilidad;
+        return TipoHabilidad.builder()
+                .id(tipoHabilidadEntity.getId())
+                .descripcion(tipoHabilidadEntity.getDescripcion())
+                .nombre(tipoHabilidadEntity.getNombre())
+                .build();
     }
 }

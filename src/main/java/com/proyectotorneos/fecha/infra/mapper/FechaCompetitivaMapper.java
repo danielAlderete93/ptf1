@@ -27,12 +27,7 @@ public class FechaCompetitivaMapper {
             return null;
         }
 
-        if (fechaCompetitiva.getPartidos() == null) {
-            partidoEntityList = new ArrayList<>();
-        } else {
-            partidoEntityList = fechaCompetitiva.getPartidos().stream().map(partidoMapper::toEntity).toList();
-        }
-
+        partidoEntityList = getPartidoEntities(fechaCompetitiva);
 
         return FechaCompetitivaEntity.builder()
                 .nroFecha(fechaCompetitiva.getNroFecha())
@@ -48,7 +43,17 @@ public class FechaCompetitivaMapper {
             return null;
         }
 
+        partidoList = getPartidos(entity);
 
+        return FechaCompetitiva.builder()
+                .id(entity.getId())
+                .nroFecha(entity.getNroFecha())
+                .partidos(partidoList)
+                .build();
+    }
+
+    private List<Partido> getPartidos(FechaCompetitivaEntity entity) {
+        List<Partido> partidoList;
         if (entity.getPartidos() == null) {
             partidoList = new ArrayList<>();
         } else {
@@ -56,12 +61,18 @@ public class FechaCompetitivaMapper {
                     .map(partidoMapper::toDomain)
                     .toList()
             ;
-        }
 
-        return FechaCompetitiva.builder()
-                .id(entity.getId())
-                .nroFecha(entity.getNroFecha())
-                .partidos(partidoList)
-                .build();
+        }
+        return partidoList;
+    }
+
+    private List<PartidoEntity> getPartidoEntities(FechaCompetitiva fechaCompetitiva) {
+        List<PartidoEntity> partidoEntityList;
+        if (fechaCompetitiva.getPartidos() == null) {
+            partidoEntityList = new ArrayList<>();
+        } else {
+            partidoEntityList = fechaCompetitiva.getPartidos().stream().map(partidoMapper::toEntity).toList();
+        }
+        return partidoEntityList;
     }
 }

@@ -6,22 +6,24 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "partido")
+@SuperBuilder
 @Getter
 @Setter
 @NoArgsConstructor
 public class PartidoEntity extends EntidadPersistente {
-    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "actuacion_equipo_local_id")
-    private ActuacionEquipoEntity equipoLocal;
+    private ActuacionEquipoEntity actuacionLocal;
 
-    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "actuacion_equipo_visitante_id")
-    private ActuacionEquipoEntity equipoVisitante;
+    private ActuacionEquipoEntity actuacionVisitante;
     @Column(name = "fecha")
     private Date fecha;
     @Column(name = "esta_finalizado")
@@ -34,9 +36,9 @@ public class PartidoEntity extends EntidadPersistente {
         if (!super.equals(o)) return false;
 
         if (isFinalizado() != that.isFinalizado()) return false;
-        if (getEquipoLocal() != null ? !getEquipoLocal().equals(that.getEquipoLocal()) : that.getEquipoLocal() != null)
+        if (getActuacionLocal() != null ? !getActuacionLocal().equals(that.getActuacionLocal()) : that.getActuacionLocal() != null)
             return false;
-        if (getEquipoVisitante() != null ? !getEquipoVisitante().equals(that.getEquipoVisitante()) : that.getEquipoVisitante() != null)
+        if (getActuacionVisitante() != null ? !getActuacionVisitante().equals(that.getActuacionVisitante()) : that.getActuacionVisitante() != null)
             return false;
         return getFecha() != null ? getFecha().equals(that.getFecha()) : that.getFecha() == null;
     }
@@ -44,8 +46,8 @@ public class PartidoEntity extends EntidadPersistente {
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (getEquipoLocal() != null ? getEquipoLocal().hashCode() : 0);
-        result = 31 * result + (getEquipoVisitante() != null ? getEquipoVisitante().hashCode() : 0);
+        result = 31 * result + (getActuacionLocal() != null ? getActuacionLocal().hashCode() : 0);
+        result = 31 * result + (getActuacionVisitante() != null ? getActuacionVisitante().hashCode() : 0);
         result = 31 * result + (getFecha() != null ? getFecha().hashCode() : 0);
         result = 31 * result + (isFinalizado() ? 1 : 0);
         return result;
