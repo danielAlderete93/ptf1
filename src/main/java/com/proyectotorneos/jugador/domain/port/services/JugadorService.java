@@ -6,7 +6,5 @@ public interface JugadorService {
 
     void guarda(Jugador jugador);
     Jugador buscaPorID(Integer id);
-
-
     void elimina(Jugador o);
 }

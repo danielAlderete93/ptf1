@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TipoHabilidadRepositoryJPA extends JpaRepository<TipoHabilidadEntity, Integer> {
-    @Query(value = "SELECT t FROM TipoHabilidadEntity t WHERE t.nombre = ?1")
+    @Query(value = "SELECT t FROM TorneoEntity t WHERE t.nombre = ?1")
     TipoHabilidadEntity findByName(String nombre);
 }

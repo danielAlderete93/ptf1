@@ -32,9 +32,15 @@ import com.proyectotorneos.partido.domain.port.services.impl.DomainPartidoServic
 import com.proyectotorneos.posicion.domain.port.repositories.PosicionJuegoRepository;
 import com.proyectotorneos.posicion.domain.port.services.PosicionJuegoService;
 import com.proyectotorneos.posicion.domain.port.services.impl.DomainPosicionJuegoService;
+import com.proyectotorneos.publicacion.domain.port.repositories.PublicacionRespository;
+import com.proyectotorneos.publicacion.domain.port.services.PublicacionService;
+import com.proyectotorneos.publicacion.domain.port.services.impl.DomainPublicacionService;
 import com.proyectotorneos.tipo_habilidad.domain.port.repositories.TipoHabilidadRepository;
 import com.proyectotorneos.tipo_habilidad.domain.port.services.TipoHabilidadService;
 import com.proyectotorneos.tipo_habilidad.domain.port.services.impl.DomainTipoHabilidadService;
+import com.proyectotorneos.torneo.domain.port.repositories.TorneoRepository;
+import com.proyectotorneos.torneo.domain.port.service.TorneoService;
+import com.proyectotorneos.torneo.domain.port.service.impl.DomainTorneoService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -98,6 +104,16 @@ public class BeanConfiguration {
     @Bean
     CompetenciaService<CompetenciaFaseEliminatoria> competenciaFaseEliminatoriaService(CompetenciaRepository<CompetenciaFaseEliminatoria> repository) {
         return new DomainCompetenciaFaseEliminatoria(repository);
+    }
+
+    @Bean
+    PublicacionService publicacionPublicacionService(PublicacionRespository repository) {
+        return new DomainPublicacionService(repository);
+    }
+
+    @Bean
+    TorneoService torneoService(TorneoRepository repository) {
+        return new DomainTorneoService(repository);
     }
 
 }

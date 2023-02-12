@@ -43,7 +43,7 @@ public class DomainEquipoService implements EquipoService {
 
     @Override
     public void elimina(Equipo o) {
-
+        this.equipoRepository.elimina(o);
     }
 
     @Override

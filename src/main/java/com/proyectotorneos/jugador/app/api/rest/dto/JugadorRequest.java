@@ -1,10 +1,10 @@
 package com.proyectotorneos.jugador.app.api.rest.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public record JugadorRequest(String nombre,
-                             Date fechaNacimiento,
+                             LocalDate fechaNacimiento,
                              Integer posicionFavoritaID,
                              Integer posicionOpcionalID,
                              String habilidadPiernas,

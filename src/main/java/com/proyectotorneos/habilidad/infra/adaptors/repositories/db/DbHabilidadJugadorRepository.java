@@ -59,6 +59,6 @@ public class DbHabilidadJugadorRepository implements HabilidadJugadorRepository 
 
     @Override
     public void elimina(HabilidadJugador o) {
-        //TODO:Logica de eliminar
+        habilidadJugadorRepositoryJPA.delete(habilidadJugadorMapper.toEntity(o));
     }
 }

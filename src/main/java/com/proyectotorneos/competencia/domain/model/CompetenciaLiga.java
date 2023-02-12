@@ -1,5 +1,6 @@
 package com.proyectotorneos.competencia.domain.model;
 
+import com.proyectotorneos.equipo.domain.model.Equipo;
 import com.proyectotorneos.fecha.domain.model.FechaCompetitiva;
 import com.proyectotorneos.tabla.domain.model.EntradaTablaPosicion;
 import com.proyectotorneos.tabla.domain.model.TablaPosicion;
@@ -16,7 +17,7 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CompetenciaLiga extends Competencia implements CompetenciaConPuntuacion {
+public class CompetenciaLiga extends Competencia implements CompetenciaConPuntuacion<EntradaTablaPosicion> {
     private List<FechaCompetitiva> fechas;
 
 
@@ -36,9 +37,19 @@ public class CompetenciaLiga extends Competencia implements CompetenciaConPuntua
         return tablaPosicion.getTablaSegun(this.getEquipos(), this.fechas);
     }
 
+
     @Override
-    public List<List<EntradaTablaPosicion>> getAllTablas() {
-        throw new UnsupportedOperationException("Las ligas solo tiene una tabla de posiciones");
+    public Integer getPosicionEquipo(Equipo equipo) {
+        EntradaTablaPosicion entrada;
+        entrada = this.getTabla().stream()
+                .filter(unaEntrada -> unaEntrada.sosEntradaDeEquipo(equipo))
+                .findFirst().orElse(null)
+        ;
+        return entrada == null ? null : entrada.getPosicion();
+    }
+
+    public Boolean equipoJuegaEnCompetencia(Equipo equipo) {
+        return this.getEquipos().contains(equipo);
     }
 
 

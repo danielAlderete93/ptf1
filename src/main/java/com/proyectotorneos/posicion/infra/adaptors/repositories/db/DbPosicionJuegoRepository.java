@@ -60,6 +60,6 @@ public class DbPosicionJuegoRepository implements PosicionJuegoRepository {
 
     @Override
     public void elimina(PosicionJuego o) {
-        //todo
+        posicionJuegoRepositoryJPA.delete(posicionJuegoMapper.toEntity(o));
     }
 }

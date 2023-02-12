@@ -2,12 +2,12 @@ package com.proyectotorneos.equipo.app.rest.controller;
 
 import com.proyectotorneos.equipo.app.rest.dto.EquipoRequest;
 import com.proyectotorneos.equipo.app.rest.dto.EquipoResponse;
-import com.proyectotorneos.jugador.app.api.rest.dto.JugadorResponse;
-import com.proyectotorneos.shared.response.dto.MessageResponse;
 import com.proyectotorneos.equipo.app.rest.mapper.EquipoRestMapper;
-import com.proyectotorneos.jugador.app.api.rest.mapper.JugadorRestMapper;
 import com.proyectotorneos.equipo.domain.model.Equipo;
 import com.proyectotorneos.equipo.domain.port.service.EquipoService;
+import com.proyectotorneos.jugador.app.api.rest.dto.JugadorResponse;
+import com.proyectotorneos.jugador.app.api.rest.mapper.JugadorRestMapper;
+import com.proyectotorneos.shared.response.dto.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/equipo")
 public class ControllerEquipo {
@@ -59,7 +60,7 @@ public class ControllerEquipo {
 
         messageResponse = new MessageResponse(
                 "Nuevo Equipo",
-                "Se salvo correctamente el equipo"
+                "Se creo correctamente el equipo: " + request.nombre()
         );
 
         return new ResponseEntity<>(messageResponse, HttpStatus.CREATED);
@@ -82,6 +83,33 @@ public class ControllerEquipo {
     }
 
 
+    @DeleteMapping(value = "{idEquipo}/borrar", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<MessageResponse> borrar(@PathVariable Integer idEquipo) {
+        Equipo equipo;
+        MessageResponse messageResponse;
+        ResponseEntity<MessageResponse> response;
+
+        try {
+            equipo = equipoService.buscaPorID(idEquipo);
+            equipoService.elimina(equipo);
+            messageResponse = new MessageResponse(
+                    "Eliminar equipo",
+                    "Se elimino correctamente al equipo " + equipo.getNombre()
+            );
+
+            response = ResponseEntity.ok(messageResponse);
+        } catch (Exception e) {
+            messageResponse = new MessageResponse(
+                    "Error al borrar equipo",
+                    e.getMessage()
+            );
+            response = new ResponseEntity<>(messageResponse, HttpStatus.BAD_REQUEST);
+        }
+
+        return response;
+
+    }
 
 
 }

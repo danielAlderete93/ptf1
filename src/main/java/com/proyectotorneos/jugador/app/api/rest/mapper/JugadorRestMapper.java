@@ -48,6 +48,7 @@ public class JugadorRestMapper {
                 jugador.getId(),
                 jugador.getNombre(),
                 jugador.getFechaNacimiento(),
+                jugador.getEdad(),
                 posicionJuegoRestMapper.toResponse(jugador.getPosicionFavorita()),
                 posicionJuegoRestMapper.toResponse(jugador.getPosicionOpcional()),
                 jugador.getHabilidadPiernas(),

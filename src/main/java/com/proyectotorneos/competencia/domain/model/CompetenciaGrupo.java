@@ -1,5 +1,6 @@
 package com.proyectotorneos.competencia.domain.model;
 
+import com.proyectotorneos.equipo.domain.model.Equipo;
 import com.proyectotorneos.tabla.domain.model.EntradaTablaPosicion;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CompetenciaGrupo extends Competencia implements CompetenciaConPuntuacion {
+public class CompetenciaGrupo extends Competencia implements CompetenciaConPuntuacion<List<EntradaTablaPosicion>> {
     List<CompetenciaLiga> grupos;
 
 
@@ -30,17 +31,24 @@ public class CompetenciaGrupo extends Competencia implements CompetenciaConPuntu
     }
 
     @Override
-    public List<EntradaTablaPosicion> getTabla() {
-        throw new UnsupportedOperationException("Los grupos tiene varias tabla de posiciones");
-    }
-
-    @Override
-    public List<List<EntradaTablaPosicion>> getAllTablas() {
-
+    public List<List<EntradaTablaPosicion>> getTabla() {
         return this.grupos.stream()
                 .map(CompetenciaLiga::getTabla)
                 .collect(Collectors.toList())
                 ;
+    }
+
+
+    @Override
+    public Integer getPosicionEquipo(Equipo equipo) {
+        CompetenciaLiga competenciaDelEquipo = this.grupos.stream()
+                .filter(competenciaLiga -> competenciaLiga.equipoJuegaEnCompetencia(equipo))
+                .findFirst()
+                .orElse(null);
+        if (competenciaDelEquipo == null) {
+            return null;
+        }
+        return competenciaDelEquipo.getPosicionEquipo(equipo);
     }
 
 

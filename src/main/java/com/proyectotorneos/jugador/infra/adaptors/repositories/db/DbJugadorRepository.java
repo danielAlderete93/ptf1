@@ -47,6 +47,6 @@ public class DbJugadorRepository implements JugadorRepository {
 
     @Override
     public void elimina(Jugador o) {
-
+        jugadorRepositoryJPA.delete(jugadorMapper.toEntity(o));
     }
 }

@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 public class EntradaTablaPosicion {
     private Equipo equipo;
+    private Integer posicion;
     private Integer partidosJugados;
     private Integer partidosGanados;
     private Integer partidosEmpatados;
@@ -21,6 +22,7 @@ public class EntradaTablaPosicion {
 
     public EntradaTablaPosicion(Equipo equipo) {
         this.equipo = equipo;
+        this.posicion=0;
         this.partidosJugados = 0;
         this.partidosGanados = 0;
         this.partidosEmpatados = 0;

@@ -16,8 +16,8 @@ public class TipoHabilidadRestMapper {
 
         return new TipoHabilidadResponse(
                 tipoHabilidad.getId(),
-                tipoHabilidad.getDescripcion(),
-                tipoHabilidad.getNombre()
+                tipoHabilidad.getNombre(),
+                tipoHabilidad.getDescripcion()
         );
 
     }

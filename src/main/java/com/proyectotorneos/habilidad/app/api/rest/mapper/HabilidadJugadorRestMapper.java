@@ -4,6 +4,7 @@ import com.proyectotorneos.habilidad.app.api.rest.dto.HabilidadJugadorRequest;
 import com.proyectotorneos.habilidad.app.api.rest.dto.HabilidadJugadorResponse;
 import com.proyectotorneos.habilidad.domain.model.HabilidadJugador;
 import com.proyectotorneos.tipo_habilidad.app.api.rest.mapper.TipoHabilidadRestMapper;
+import com.proyectotorneos.tipo_habilidad.domain.model.TipoHabilidad;
 import com.proyectotorneos.tipo_habilidad.domain.port.services.TipoHabilidadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -37,16 +38,18 @@ public class HabilidadJugadorRestMapper {
     }
 
     public HabilidadJugador toDomain(HabilidadJugadorRequest request) {
+        TipoHabilidad tipoHabilidad;
 
 
-        if (request == null) {
+        tipoHabilidad = tipoHabilidadService.buscaPorID(request.tipoHabilidadID());
+        if (request == null && tipoHabilidad == null) {
             return null;
         }
 
         return HabilidadJugador.builder()
                 .descripcion(request.descripcion())
                 .nombre(request.nombre())
-                .tipoHabilidad(tipoHabilidadService.buscaPorID(request.tipoHabilidadID()))
+                .tipoHabilidad(tipoHabilidad)
                 .build();
     }
 }

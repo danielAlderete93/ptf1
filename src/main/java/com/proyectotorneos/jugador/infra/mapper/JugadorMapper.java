@@ -34,7 +34,7 @@ public class JugadorMapper {
         }
 
         posicionOpcional = posicionJuegoMapper.toEntity(domain.getPosicionOpcional());
-        posicionFavorita = posicionJuegoMapper.toEntity(domain.getPosicionOpcional());
+        posicionFavorita = posicionJuegoMapper.toEntity(domain.getPosicionFavorita());
 
         habilidadJugadorEntities = getHabilidadJugadorEntities(domain);
 

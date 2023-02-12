@@ -52,6 +52,6 @@ public class DbEquipoRepository implements EquipoRepository {
 
     @Override
     public void elimina(Equipo o) {
-
+        equipoRepositoryJPA.delete(equipoMapper.toEntity(o));
     }
 }

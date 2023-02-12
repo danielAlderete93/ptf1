@@ -59,6 +59,6 @@ public class DbTipoHabilidadRepository implements TipoHabilidadRepository {
 
     @Override
     public void elimina(TipoHabilidad o) {
-
+        tipoHabilidadRepositoryJPA.delete(tipoHabilidadMapper.toEntity(o));
     }
 }
